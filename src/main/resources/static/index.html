@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>REST API</title>
+    <!--CDNs-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--    <script src="../../resources/static/main.js"></script>-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+<div class="mb-5"></div>
+<div class="container">
+    <input class="btn btn-outline-primary" type="button" value="Add user" id="addButton">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">email</th>
+            <th scope="col">phone</th>
+            <th scope="col">delete</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $( document ).ready(function() {
+        $( "#addButton" ).bind( "click", AddForm);
+        getUsers();
+    });
+
+    function AddForm() {
+        $( "#addButton" ).after("<div id='addUserForm'></div>");
+        $( "#addUserForm" ).load("../../resources/static/blocks/registerClient.html");
+        $( "#addButton" ).remove();
+    }
+
+    function ListUsers(usersList){
+        usersList.forEach(element => {
+            $('tbody').append('<tr id="tr-'+ element.id +'">'+
+                '<th scope="row">'+element.id+'</th>'+
+                '<td>'+element.client_name+'</td>'+
+                '<td>'+element.email+'</td>'+
+                '<td>'+element.phone+'</td>'+
+                '<td><input className="btn btn-danger" type="button" value="X" id="'+element.id+'"></td>'+
+                '</tr>');
+
+            $('input#'+element.id).bind("click", function (){
+                $.ajax({
+                    type: "delete",
+                    url: "http://localhost:8080/clients/"+element.id,
+                    success: function() {
+                        $("#tr-"+element.id).remove();
+                    }
+                });
+            });
+        });
+    }
+
+    function getUsers(){
+        $.ajax({
+            type: "GET",
+            crossDomain: true,
+            url: "http://localhost:8080/clients",
+            success: function(data) {
+                ListUsers(data)
+            }
+        })
+    }
+</script>
+
+</body>
+</html>
