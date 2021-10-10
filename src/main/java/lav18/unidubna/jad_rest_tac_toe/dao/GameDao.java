@@ -13,6 +13,10 @@ public class GameDao {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Game.class, id);
     }
 
+//    public Game findByName(String game_name){
+//        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Game.class, game_name);
+//    }
+
     public void save(Game game) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();

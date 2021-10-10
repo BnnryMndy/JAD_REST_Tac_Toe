@@ -1,9 +1,8 @@
-package lav18.unidubna.jad_simplerest.controller;
+package lav18.unidubna.jad_rest_tac_toe.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class IndexController {

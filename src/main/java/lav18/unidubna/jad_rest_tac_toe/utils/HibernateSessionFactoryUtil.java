@@ -2,6 +2,7 @@ package lav18.unidubna.jad_rest_tac_toe.utils;
 
 
 
+import lav18.unidubna.jad_rest_tac_toe.model.Game;
 import lav18.unidubna.jad_rest_tac_toe.model.Player;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -16,7 +17,7 @@ public class HibernateSessionFactoryUtil {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration().configure();
-                configuration.addAnnotatedClass(Player.class);
+                configuration.addAnnotatedClass(Player.class).addAnnotatedClass(Game.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
             } catch (Exception e) {

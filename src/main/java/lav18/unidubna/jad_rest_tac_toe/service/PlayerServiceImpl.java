@@ -27,7 +27,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public boolean update(Player player, int id) {
-        if (playerDao.findById(id) == null) {
+        if (playerDao.findById(id) != null) {
             playerDao.delete(player);
             player.setId(id);
             playerDao.save(player);

@@ -24,6 +24,17 @@ public class Game {
     @Column
     private String field;
 
+    @Column
+    private String game_name;
+
+    public String getGame_name() {
+        return game_name;
+    }
+
+    public void setGame_name(String game_name) {
+        this.game_name = game_name;
+    }
+
     public Integer getGame_id() {
         return game_id;
     }
